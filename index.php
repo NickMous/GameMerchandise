@@ -2,21 +2,10 @@
 
 require "connect.php";
 
-$host = '127.0.0.1';
-$db   = 'merchstore';
-$user = 'bit_academy';
-$pass = 'bit_academy';
-
-$dsn = "mysql:host=$host;dbname=$db;";
-
-try {
-    $pdo = new PDO($dsn, $user, $pass);
-} catch (\PDOException $e) {
-    throw new \PDOException($e->getMessage(), (int)$e->getCode());
-}
-
 $sql = "SELECT game FROM gamemerch GROUP BY game;";
 $games = $pdo->query($sql)->fetchAll();
+$sql = "SELECT * FROM gamemerch WHERE voorraad > 0 ORDER BY id DESC;";
+$newitems = $pdo->query($sql)->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,35 +20,21 @@ $games = $pdo->query($sql)->fetchAll();
 </head>
 
 <body>
-    <nav class="topnav" id="myTopnav">
-        <div>
-            <h1 class="title">Merchandise</h1>
-        </div>
-        <div class="linkdiv">
-            <div class="dropdown">
-                <button class="dropbtn">Dropdown
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-content">
-                    <?php foreach ($games as $game) : ?>
-                        <a href="#"><?= $game ?></a>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-            <a href="" class="links">Over ons</a>
-        </div>
-        <div>
-            <a href="" class="links">Account</a>
-        </div>
-    </nav>
-    <div class="newelem">
-        <h2>Nieuwe items</h2>
+    <?php require "nav.php"; ?>
+    <div class="newitems">
+        <h1>Nieuwe items</h1>
         <div class="itemscroll">
-            <div class="item">
-                <h3>Itemnaam</h3>
-                <img>
-                <p></p>
-            </div>
+            <?php foreach ($newitems as $item) : ?>
+                <a href="detail.php?id=<?= $item["id"] ?>">
+                    <div class="item shadow">
+                        <div>
+                            <h3 class="mg"><?= $item["naam"] ?></h3>
+                            <img src="media/itemimg/<?= $item["foto"] ?>" class="itemimg">
+                        </div>
+                        <a href="detail.php?id=<?= $item["id"] ?>">Ga naar item ></a>
+                    </div>
+                </a>
+            <?php endforeach; ?>
         </div>
     </div>
 </body>
