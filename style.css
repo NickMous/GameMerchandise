@@ -315,4 +315,26 @@ div:nth-child(3) {
 
 .productimg {
     max-width: 50%;
+    max-height: 70%;
+}
+
+.signup {
+    color: #1DE9B6;
+}
+
+.statistic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+    width: 100%;
+    flex-direction: column;
+}
+
+.notifymsg {
+    color: darkgoldenrod;
+    background-color: yellow;
+    border: darkgoldenrod solid 3px;
+    padding: 7px 10px;
+    border-radius: 7px;
 }

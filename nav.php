@@ -4,15 +4,16 @@ if ($_SESSION["logged"]) {
     $sql = "SELECT * FROM userdata WHERE username = ?;";
     $users = $pdo->prepare($sql);
     $users->execute([$_SESSION["username"]]);
-    foreach ($users as $u) {
-        $user = $u;
-    }
+    $user = $users->fetch();
     $name = $_SESSION["username"];
     $logged = true;
 } else {
     $name = "Account";
     $logged = false;
 }
+
+$sql = "SELECT game FROM gamemerch GROUP BY game;";
+$games = $pdo->query($sql)->fetchAll();
 ?>
 <nav class="topnav" id="myTopnav">
     <div>

@@ -59,7 +59,7 @@ if (isset($_POST["login"])) {
             <?php endif; ?>
         </div>
         <div>
-            <p>Nog geen account? <a href="signup.php">Registreer je!</a></p>
+            <p>Nog geen account? <a href="signup.php" class="signup">Registreer je!</a></p>
         </div>
     </div>
 </body>
