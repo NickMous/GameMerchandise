@@ -47,6 +47,9 @@ $games = $pdo->query($sql)->fetchAll();
                     <a href="favs.php" id="fav">Favorieten</a>
                     <a href="profile.php" id="profile">Mijn profiel</a>
                     <a href="logout.php" id="logout">Uitloggen</a>
+                    <?php if ($user["admin"] == "yes") : ?>
+                        <a href="admin.php" class="admin">Admin</a>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

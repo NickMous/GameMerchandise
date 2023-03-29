@@ -272,8 +272,9 @@ h3.mg {
     align-items: center;
 }
 
-.loginform input, .stylish table input {
-    border: none;
+.loginform input,
+.stylish table input {
+    border: solid 1px #00695C;
     background-color: #E0F2F1;
     border-radius: 5px;
 }
@@ -369,6 +370,7 @@ table {
     background-color: whitesmoke;
     padding: 20px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
 }
 
 td {
@@ -393,11 +395,48 @@ th:first-child {
     border-left: none;
 }
 
-thead, tbody {
+thead,
+tbody {
     margin: 0;
     padding: 0;
 }
 
-.noborder th, .noborder td {
+.noborder th,
+.noborder td {
     border: none;
+}
+
+.editdiv {
+    display: flex;
+    flex-direction: column;
+    color: #00897B;
+}
+
+.editdiv a {
+    margin-bottom: 8px;
+    margin-top: 8px;
+}
+
+.invisible {
+    height: 0;
+    width: 0;
+    display: none;
+}
+
+.texthover {
+    transition: 0.4s all ease-in-out;
+}
+
+.texthover:hover {
+    color: #00695C;
+    transition: 0.4s all ease-in-out;
+}
+
+.hovershadow:hover {
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+}
+
+.hovershadow {
+    transition: all 0.3s ease-in-out;
 }

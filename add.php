@@ -2,8 +2,6 @@
 
 require "connect.php";
 
-var_dump($_FILES);
-
 $target_dir = "media/itemimg/";
 $target_file = $target_dir . basename($_FILES["foto"]["name"]);
 $uploadOk = 1;

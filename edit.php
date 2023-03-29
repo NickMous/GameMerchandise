@@ -18,10 +18,14 @@ if ($_SESSION["logged"]) {
 if ($user["admin"] == "no") {
     header("Location: index.php?no");
 }
+$sql = "SELECT * FROM gamemerch WHERE id=?;";
+$games = $pdo->prepare($sql);
+$games->execute([$_GET["id"]]);
+$currentprod = $games->fetch();
 
-$sql = "SELECT * FROM gamemerch;";
-$games = $pdo->query($sql);
-$games->execute();
+if ($_GET["id"] == "") {
+    header("Location: productlist.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,9 +34,8 @@ $games->execute();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Producten</title>
+    <title>Bewerken</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
 </head>
 
 <body>
@@ -70,37 +73,39 @@ $games->execute();
         <?php endif; ?>
     </nav>
     <div class="tablediv">
-        <table>
-            <thead>
-                <th>Itemnaam</th>
-                <th>Itemfoto</th>
-                <th>Bestandsnaam</th>
-                <th>Game</th>
-                <th>Prijs</th>
-                <th>Voorraad</th>
-                <th>Bescrijving</th>
-                <th></th>
-            </thead>
-            <?php foreach ($games as $game) : ?>
+        <form action="editdone.php" method="post" enctype="multipart/form-data" class="stylish">
+            <input type="text" name="id" id="id" value="<?= $currentprod["id"] ?>" class="invisible">
+            <table class="noborder">
                 <tr>
-                    <td><?= $game["naam"] ?></td>
-                    <td>
-                        <img src="media/itemimg/<?= $game["foto"] ?>" alt="img if set" class="tableimg">
-                    </td>
-                    <td><?= $game["foto"] ?></td>
-                    <td><?= $game["game"] ?></td>
-                    <td><?= $game["prijs"] ?></td>
-                    <td><?= $game["voorraad"] ?></td>
-                    <td><?= $game["beschrijving"] ?></td>
-                    <td>
-                        <div class="editdiv">
-                            <a href="edit.php?id=<?= $game["id"] ?>" class="texthover">Bewerk product</a>
-                            <a href="editdone.php?id=<?= $game["id"] ?>&remove='yes'" class="texthover">Verwijder product</a>
-                        </div>
-                    </td>
+                    <th>Itemnaam</th>
+                    <td><input type="text" name="itemnaam" id="itemnaam" value="<?= $currentprod["naam"] ?>"></td>
                 </tr>
-            <?php endforeach; ?>
-        </table>
+                <tr>
+                    <th>Foto</th>
+                    <td><input type="file" name="foto" id="foto" value="<?= $currentprod["foto"] ?>"></td>
+                </tr>
+                <tr>
+                    <th>Game</th>
+                    <td><input type="text" name="game" id="game" value="<?= $currentprod["game"] ?>"></td>
+                </tr>
+                <tr>
+                    <th>Prijs</th>
+                    <td><input type="text" name="prijs" id="prijs" value="<?= $currentprod["prijs"] ?>"></td>
+                </tr>
+                <tr>
+                    <th>Voorraad</th>
+                    <td><input type="number" name="voorraad" id="voorraad" value="<?= $currentprod["voorraad"] ?>"></td>
+                </tr>
+                <tr>
+                    <th>Beschrijving</th>
+                    <td><input type="text" name="beschrijving" id="beschrijving" value="<?= $currentprod["beschrijving"] ?>"></td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td><input type="submit" value="Submit" class="hovershadow"></td>
+                </tr>
+            </table>
+        </form>
     </div>
 </body>
 
