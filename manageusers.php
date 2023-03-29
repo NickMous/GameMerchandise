@@ -19,21 +19,9 @@ if ($user["admin"] == "no") {
     header("Location: index.php?no");
 }
 
-$sql = "SELECT id FROM gamemerch;";
-$productcount = 0;
-$stmt = $pdo->prepare($sql);
-$stm = $stmt->execute();
-foreach ($stmt as $ah) {
-    $productcount++;
-}
-
-$sql = "SELECT id FROM userdata;";
-$accountcount = 0;
-$stmt = $pdo->prepare($sql);
-$stm = $stmt->execute();
-foreach ($stmt as $ah) {
-    $accountcount++;
-}
+$sql = "SELECT * FROM userdata;";
+$userlist = $pdo->query($sql);
+$userlist->execute();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +30,7 @@ foreach ($stmt as $ah) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin panel</title>
+    <title>User management</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
@@ -55,7 +43,7 @@ foreach ($stmt as $ah) {
             </a>
         </div>
         <div class="linkdiv">
-            <a href="manageusers.php" class="links">Users</a>
+            <a href="manageusers.php" class="links active">Users</a>
             <a href="productlist.php" class="links">Products</a>
             <a href="addproduct.php" class="links">Add product</a>
         </div>
@@ -81,11 +69,26 @@ foreach ($stmt as $ah) {
             </div>
         <?php endif; ?>
     </nav>
-    <div class="statistic">
-        <h1>Snelle statistieken</h1>
-        <p>Aantal producten: <?= $productcount ?></p>
-        <p>Aantal accounts: <?= $accountcount ?></p>
-        <h3 class="notifymsg">Navigeer naar de pagina's in de navbar</h3>
+    <div class="tablediv">
+        <table>
+            <thead>
+                <th>Gebruikersnaam</th>
+                <th>Profielfoto</th>
+                <th>Admin</th>
+                <th>Acties</th>
+            </thead>
+            <?php foreach ($userlist as $user) : ?>
+                <tr>
+                    <td><?= $user["username"] ?></td>
+                    <td>
+                        <img src="media/pfp/<?= $user["pfp"] ?>" alt="pfp if set" class="tableimg">
+                        <?= $user["pfp"] ?>
+                    </td>
+                    <td><?= $user["admin"] ?></td>
+                    <td></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
     </div>
 </body>
 

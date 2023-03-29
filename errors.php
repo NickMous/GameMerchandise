@@ -1,40 +1,3 @@
-<?php
-
-require "connect.php";
-
-if ($_SESSION["logged"]) {
-    $sql = "SELECT * FROM userdata WHERE username = ?;";
-    $users = $pdo->prepare($sql);
-    $users->execute([$_SESSION["username"]]);
-    $user = $users->fetch();
-    $name = $_SESSION["username"];
-    $logged = true;
-} else {
-    $name = "Account";
-    $logged = false;
-    header("Location: index.php");
-}
-
-if ($user["admin"] == "no") {
-    header("Location: index.php?no");
-}
-
-$sql = "SELECT id FROM gamemerch;";
-$productcount = 0;
-$stmt = $pdo->prepare($sql);
-$stm = $stmt->execute();
-foreach ($stmt as $ah) {
-    $productcount++;
-}
-
-$sql = "SELECT id FROM userdata;";
-$accountcount = 0;
-$stmt = $pdo->prepare($sql);
-$stm = $stmt->execute();
-foreach ($stmt as $ah) {
-    $accountcount++;
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,7 +5,7 @@ foreach ($stmt as $ah) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin panel</title>
+    <title>User management</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
@@ -57,7 +20,7 @@ foreach ($stmt as $ah) {
         <div class="linkdiv">
             <a href="manageusers.php" class="links">Users</a>
             <a href="productlist.php" class="links">Products</a>
-            <a href="addproduct.php" class="links">Add product</a>
+            <a href="addproduct.php" class="links active">Add product</a>
         </div>
         <?php if ($logged) : ?>
             <div class="linkdiv account">
@@ -81,12 +44,17 @@ foreach ($stmt as $ah) {
             </div>
         <?php endif; ?>
     </nav>
-    <div class="statistic">
-        <h1>Snelle statistieken</h1>
-        <p>Aantal producten: <?= $productcount ?></p>
-        <p>Aantal accounts: <?= $accountcount ?></p>
-        <h3 class="notifymsg">Navigeer naar de pagina's in de navbar</h3>
-    </div>
+    <?php if ($_GET["error"] == "noimg") : ?>
+        <p class="errormsg">Geen foto aangeleverd</p>
+    <?php else : ?>
+        <?php  if ($_GET["error"] == "toolarge") : ?>
+        <p class="errormsg">De foto is te groot van bestandsgrootte</p>
+        <?php else : ?>
+            <?php if ($_GET["error"] == "notsupported") : ?>
+            <p class="errormsg">Alleen JPG, PNG, JPEG en GIF zijn toegestaan</p>
+            <?php endif; ?>
+        <?php endif; ?>
+    <?php endif; ?>
 </body>
 
 </html>

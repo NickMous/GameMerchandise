@@ -19,21 +19,9 @@ if ($user["admin"] == "no") {
     header("Location: index.php?no");
 }
 
-$sql = "SELECT id FROM gamemerch;";
-$productcount = 0;
-$stmt = $pdo->prepare($sql);
-$stm = $stmt->execute();
-foreach ($stmt as $ah) {
-    $productcount++;
-}
-
-$sql = "SELECT id FROM userdata;";
-$accountcount = 0;
-$stmt = $pdo->prepare($sql);
-$stm = $stmt->execute();
-foreach ($stmt as $ah) {
-    $accountcount++;
-}
+$sql = "SELECT * FROM gamemerch;";
+$games = $pdo->query($sql);
+$games->execute();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +30,7 @@ foreach ($stmt as $ah) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin panel</title>
+    <title>User management</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
@@ -57,7 +45,7 @@ foreach ($stmt as $ah) {
         <div class="linkdiv">
             <a href="manageusers.php" class="links">Users</a>
             <a href="productlist.php" class="links">Products</a>
-            <a href="addproduct.php" class="links">Add product</a>
+            <a href="addproduct.php" class="links active">Add product</a>
         </div>
         <?php if ($logged) : ?>
             <div class="linkdiv account">
@@ -81,11 +69,39 @@ foreach ($stmt as $ah) {
             </div>
         <?php endif; ?>
     </nav>
-    <div class="statistic">
-        <h1>Snelle statistieken</h1>
-        <p>Aantal producten: <?= $productcount ?></p>
-        <p>Aantal accounts: <?= $accountcount ?></p>
-        <h3 class="notifymsg">Navigeer naar de pagina's in de navbar</h3>
+    <div class="tablediv">
+        <form action="add.php" method="post" enctype="multipart/form-data" class="stylish">
+            <table class="noborder">
+                <tr>
+                    <th>Itemnaam</th>
+                    <td><input type="text" name="itemnaam" id="itemnaam"></td>
+                </tr>
+                <tr>
+                    <th>Foto</th>
+                    <td><input type="file" name="foto" id="foto"></td>
+                </tr>
+                <tr>
+                    <th>Game</th>
+                    <td><input type="text" name="game" id="game"></td>
+                </tr>
+                <tr>
+                    <th>Prijs</th>
+                    <td><input type="text" name="prijs" id="prijs"></td>
+                </tr>
+                <tr>
+                    <th>Voorraad</th>
+                    <td><input type="number" name="voorraad" id="voorraad"></td>
+                </tr>
+                <tr>
+                    <th>Beschrijving</th>
+                    <td><input type="text" name="beschrijving" id="beschrijving"></td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td><input type="submit" value="Submit"></td>
+                </tr>
+            </table>
+        </form>
     </div>
 </body>
 

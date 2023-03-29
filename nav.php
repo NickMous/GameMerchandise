@@ -23,16 +23,16 @@ $games = $pdo->query($sql)->fetchAll();
     </div>
     <div class="linkdiv">
         <div class="dropdown">
-            <button class="dropbtn">Gamecollecties
+            <button class="dropbtn" id="collection">Gamecollecties
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-content">
                 <?php foreach ($games as $game) : ?>
-                    <a href="collection.php?game=<?= $game["game"] ?>"><?= $game["game"] ?></a>
+                    <a href="collection.php?game=<?= $game["game"] ?>" id="<?= $game["game"] ?>"><?= $game["game"] ?></a>
                 <?php endforeach; ?>
             </div>
         </div>
-        <a href="" class="links">Over ons</a>
+        <a href="" class="links" id="aboutus">Over ons</a>
     </div>
     <?php if ($logged) : ?>
         <div class="linkdiv account">
@@ -40,19 +40,19 @@ $games = $pdo->query($sql)->fetchAll();
                 <img src="media/pfp/<?= $user["pfp"] ?>" alt="">
             <?php endif; ?>
             <div class="dropdown">
-                <button class="dropbtn"><?= $name ?>
+                <button class="dropbtn" id="pf"><?= $name ?>
                     <i class="fa fa-caret-down"></i>
                 </button>
                 <div class="dropdown-content accountcontent">
-                    <a href="favs.php">Favorieten</a>
-                    <a href="profile.php">Mijn profiel</a>
-                    <a href="logout.php">Uitloggen</a>
+                    <a href="favs.php" id="fav">Favorieten</a>
+                    <a href="profile.php" id="profile">Mijn profiel</a>
+                    <a href="logout.php" id="logout">Uitloggen</a>
                 </div>
             </div>
         </div>
     <?php else : ?>
         <div>
-            <a href="login.php" class="links account">Inloggen</a>
+            <a href="login.php" class="links account" id="login">Inloggen</a>
         </div>
     <?php endif; ?>
 </nav>

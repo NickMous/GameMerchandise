@@ -58,7 +58,14 @@ h1.title {
 }
 
 .links {
-    padding: 0 10px;
+    padding: 14px 16px;
+    transition: 0.25s all ease-in-out;
+}
+
+.links:hover {
+    padding: 14px 16px;
+    background-color: red;
+    transition: all 0.25s ease-in-out;
 }
 
 .linkdiv {
@@ -265,7 +272,7 @@ h3.mg {
     align-items: center;
 }
 
-.loginform input {
+.loginform input, .stylish table input {
     border: none;
     background-color: #E0F2F1;
     border-radius: 5px;
@@ -319,7 +326,7 @@ div:nth-child(3) {
 }
 
 .signup {
-    color: #1DE9B6;
+    color: #00796B;
 }
 
 .statistic {
@@ -337,4 +344,60 @@ div:nth-child(3) {
     border: darkgoldenrod solid 3px;
     padding: 7px 10px;
     border-radius: 7px;
+}
+
+.active {
+    padding: 14px 16px;
+    background-color: #00695C;
+}
+
+.tablediv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+}
+
+.tableimg {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+table {
+    margin-top: 10px;
+    background-color: whitesmoke;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+td {
+    padding: 10px;
+    border-top: 1px grey solid;
+    border-left: 1px solid grey;
+    margin: 0;
+}
+
+td:first-child {
+    border-left: none;
+}
+
+th {
+    padding: 10px;
+    border-left: 1px solid grey;
+    margin: 0;
+    border-width: 1px;
+}
+
+th:first-child {
+    border-left: none;
+}
+
+thead, tbody {
+    margin: 0;
+    padding: 0;
+}
+
+.noborder th, .noborder td {
+    border: none;
 }

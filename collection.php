@@ -18,6 +18,18 @@ $games = $pdo->query($sql)->fetchAll();
     <title><?= $_GET["game"] ?></title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
+    <style>
+        #collection {
+            padding: 14px 16px;
+            background-color: #00695C;
+        }
+
+        #<?= $_GET["game"] ?> {
+            padding: 14px 16px;
+            background-color: #00695C;
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
