@@ -23,7 +23,7 @@
             <a href="addproduct.php" class="links active">Add product</a>
         </div>
         <?php if ($logged) : ?>
-            <div class="linkdiv account">
+            <div class="linkdiv account left">
                 <?php if (isset($user["pfp"])) : ?>
                     <img src="media/pfp/<?= $user["pfp"] ?>" alt="">
                 <?php endif; ?>
@@ -39,7 +39,7 @@
                 </div>
             </div>
         <?php else : ?>
-            <div>
+            <div class="left">
                 <a href="login.php" class="links account">Inloggen</a>
             </div>
         <?php endif; ?>

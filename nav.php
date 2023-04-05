@@ -22,7 +22,7 @@ $games = $pdo->query($sql)->fetchAll();
         </a>
     </div>
     <div class="linkdiv">
-        <div class="dropdown">
+        <div class="dropdown opened">
             <button class="dropbtn" id="collection">Gamecollecties
                 <i class="fa fa-caret-down"></i>
             </button>
@@ -35,7 +35,29 @@ $games = $pdo->query($sql)->fetchAll();
         <a href="" class="links" id="aboutus">Over ons</a>
     </div>
     <?php if ($logged) : ?>
-        <div class="linkdiv account">
+        <div class="linkdiv account left">
+            <div class="dropdown">
+                <button class="links scicon dropbtn">
+                    <img src="media/extra/cart-shopping-solid.svg" alt="shoppingcart" class="icon">
+                </button>
+                <div class="dropdown-content sccontent">
+                    <div class="scelem">
+                        <img src="media/itemimg/badtoy.jpg" alt="toy">
+                        <div>
+                            <h4>toy</h4>
+                            <p>4.99</p>
+                            <p>In winkelwagen: 5</p>
+                        </div>
+                        <div class="scbtns">
+                            <div>
+                                <button>+</button>
+                                <button>-</button>
+                            </div>
+                            <button>verwijder</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <?php if (isset($user["pfp"])) : ?>
                 <img src="media/pfp/<?= $user["pfp"] ?>" alt="">
             <?php endif; ?>
@@ -44,7 +66,6 @@ $games = $pdo->query($sql)->fetchAll();
                     <i class="fa fa-caret-down"></i>
                 </button>
                 <div class="dropdown-content accountcontent">
-                    <a href="favs.php" id="fav">Favorieten</a>
                     <a href="profile.php" id="profile">Mijn profiel</a>
                     <a href="logout.php" id="logout">Uitloggen</a>
                     <?php if ($user["admin"] == "yes") : ?>
@@ -54,7 +75,7 @@ $games = $pdo->query($sql)->fetchAll();
             </div>
         </div>
     <?php else : ?>
-        <div>
+        <div class="left">
             <a href="login.php" class="links account" id="login">Inloggen</a>
         </div>
     <?php endif; ?>

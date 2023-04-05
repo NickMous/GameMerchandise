@@ -57,7 +57,6 @@ $userlist->execute();
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-content accountcontent">
-                        <a href="favs.php">Favorieten</a>
                         <a href="profile.php">Mijn profiel</a>
                         <a href="logout.php">Uitloggen</a>
                     </div>
@@ -74,18 +73,24 @@ $userlist->execute();
             <thead>
                 <th>Gebruikersnaam</th>
                 <th>Profielfoto</th>
+                <th>Bestandsnaam</th>
                 <th>Admin</th>
-                <th>Acties</th>
+                <th></th>
             </thead>
             <?php foreach ($userlist as $user) : ?>
                 <tr>
                     <td><?= $user["username"] ?></td>
                     <td>
                         <img src="media/pfp/<?= $user["pfp"] ?>" alt="pfp if set" class="tableimg">
-                        <?= $user["pfp"] ?>
                     </td>
+                    <td><?= $user["pfp"] ?></td>
                     <td><?= $user["admin"] ?></td>
-                    <td></td>
+                    <td>
+                        <div class="editdiv">
+                            <a href="edituser.php?id=<?= $user["id"] ?>" class="texthover">Bewerk gebruiker</a>
+                            <a href="edituserdone.php?id=<?= $user["id"] ?>&remove='yes'" class="texthover">Verwijder gebruiker</a>
+                        </div>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </table>

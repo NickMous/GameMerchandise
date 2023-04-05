@@ -51,7 +51,7 @@ if ($_GET["id"] == "") {
             <a href="addproduct.php" class="links">Add product</a>
         </div>
         <?php if ($logged) : ?>
-            <div class="linkdiv account">
+            <div class="linkdiv account left">
                 <?php if (isset($user["pfp"])) : ?>
                     <img src="media/pfp/<?= $user["pfp"] ?>" alt="">
                 <?php endif; ?>
@@ -67,7 +67,7 @@ if ($_GET["id"] == "") {
                 </div>
             </div>
         <?php else : ?>
-            <div>
+            <div class="left">
                 <a href="login.php" class="links account">Inloggen</a>
             </div>
         <?php endif; ?>

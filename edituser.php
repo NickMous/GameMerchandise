@@ -19,22 +19,12 @@ if ($user["admin"] == "no") {
     header("Location: index.php?no");
 }
 
-$sql = "SELECT id FROM gamemerch;";
-$productcount = 0;
-$stmt = $pdo->prepare($sql);
-$stm = $stmt->execute();
-foreach ($stmt as $ah) {
-    $productcount++;
-}
-
-$sql = "SELECT id FROM userdata;";
-$accountcount = 0;
-$stmt = $pdo->prepare($sql);
-$stm = $stmt->execute();
-foreach ($stmt as $ah) {
-    $accountcount++;
-}
+$sql = "SELECT * FROM userdata WHERE id=?;";
+$userlist = $pdo->prepare($sql);
+$userlist->execute([$_GET["id"]]);
+$user = $userlist->fetch();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,9 +32,8 @@ foreach ($stmt as $ah) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin panel</title>
+    <title>Gebruiker bewerken</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
 </head>
 
 <body>
@@ -55,12 +44,12 @@ foreach ($stmt as $ah) {
             </a>
         </div>
         <div class="linkdiv">
-            <a href="manageusers.php" class="links">Users</a>
+            <a href="manageusers.php" class="links active">Users</a>
             <a href="productlist.php" class="links">Products</a>
             <a href="addproduct.php" class="links">Add product</a>
         </div>
         <?php if ($logged) : ?>
-            <div class="linkdiv account left">
+            <div class="linkdiv account">
                 <?php if (isset($user["pfp"])) : ?>
                     <img src="media/pfp/<?= $user["pfp"] ?>" alt="">
                 <?php endif; ?>
@@ -69,23 +58,46 @@ foreach ($stmt as $ah) {
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-content accountcontent">
-                        <a href="favs.php">Favorieten</a>
                         <a href="profile.php">Mijn profiel</a>
                         <a href="logout.php">Uitloggen</a>
                     </div>
                 </div>
             </div>
         <?php else : ?>
-            <div class="left">
+            <div>
                 <a href="login.php" class="links account">Inloggen</a>
             </div>
         <?php endif; ?>
     </nav>
-    <div class="statistic">
-        <h1>Snelle statistieken</h1>
-        <p>Aantal producten: <?= $productcount ?></p>
-        <p>Aantal accounts: <?= $accountcount ?></p>
-        <h3 class="notifymsg">Navigeer naar de pagina's in de navbar</h3>
+    <div class="tablediv noborder">
+        <form action="edituserdone.php" method="post" enctype="multipart/form-data">
+            <input type="number" name="id" id="id" class="invisible" value="<?= $_GET["id"] ?>">
+            <table>
+                <tr>
+                    <td>Gebruikersnaam</td>
+                    <td><input type="text" name="username" id="username" value="<?= $user["username"] ?>"></td>
+                </tr>
+                <tr>
+                    <td>Wachtwoord</td>
+                    <td><input type="password" name="password" id="pwd"></td>
+                </tr>
+                <tr>
+                    <td>Profielfoto</td>
+                    <td><input type="file" name="foto" id="foto" value="<?= $user["pfp"] ?>"></td>
+                </tr>
+                <tr>
+                    <td>Admin</td>
+                    <td><input type="checkbox" name="admin" id="admin" 
+                    <?php if ($user["admin"] == "yes") {
+                        echo "checked";
+                    } ?>></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Wijzig"></td>
+                </tr>
+            </table>
+        </form>
     </div>
 </body>
 

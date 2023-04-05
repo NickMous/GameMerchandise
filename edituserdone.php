@@ -2,23 +2,30 @@
 
 require "connect.php";
 
+if (isset($_POST["admin"])) {
+    $admin = "yes";
+} else {
+    $admin = "no";
+}
+
 if (isset($_GET["remove"])) {
-    $sql = "SELECT * FROM gamemerch WHERE id=?";
+    $sql = "SELECT * FROM userdata WHERE id=?";
     $user = $pdo->prepare($sql);
     $user->execute([$_GET["id"]]);
     $game = $user->fetch();
-    unlink("media/itemimg/" . $game["foto"]);
-    $sql = "DELETE FROM gamemerch WHERE id=?";
+    unlink("media/pfp/" . $game["foto"]);
+    $sql = "DELETE FROM userdata WHERE id=?";
     $pdo->prepare($sql)->execute([$_GET["id"]]);
-    header("Location: productlist.php");
-} else if ($_FILES["foto"]["name"] != "") {
-    $sql = "SELECT * FROM gamemerch WHERE id=?";
+}
+
+if ($_FILES["foto"]["name"] != "") {
+    $sql = "SELECT * FROM userdata WHERE id=?";
     $user = $pdo->prepare($sql);
     $user->execute([$_POST["id"]]);
     $game = $user->fetch();
-    unlink("media/itemimg/" . $game["foto"]);
+    unlink("media/pfp/" . $game["pfp"]);
 
-    $target_dir = "media/itemimg/";
+    $target_dir = "media/pfp/";
     $target_file = $target_dir . basename($_FILES["foto"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
@@ -69,11 +76,17 @@ if (isset($_GET["remove"])) {
             echo "Sorry, there was an error uploading your file.";
         }
     }
-    $sql = "UPDATE gamemerch SET naam=?, game=?, prijs=?, voorraad=?, beschrijving=?, foto=? WHERE id=?;";
-    $pdo->prepare($sql)->execute([$_POST["itemnaam"], $_POST["game"], $_POST["prijs"], $_POST["voorraad"], $_POST["beschrijving"], $_FILES["foto"]["name"], $_POST["id"]]);
-    header("Location: edit.php?id=" . $_POST["id"]);
+    $sql = "UPDATE userdata SET username=?, admin=?, pfp=? WHERE id=?;";
+    $pdo->prepare($sql)->execute([$_POST["username"], $admin, $_FILES["foto"]["name"], $_POST["id"]]);
 } else {
-    $sql = "UPDATE gamemerch SET naam=?, game=?, prijs=?, voorraad=?, beschrijving=? WHERE id=?;";
-    $pdo->prepare($sql)->execute([$_POST["itemnaam"], $_POST["game"], $_POST["prijs"], $_POST["voorraad"], $_POST["beschrijving"], $_POST["id"]]);
-    header("Location: edit.php?id=" . $_POST["id"]);
+    $sql = "UPDATE userdata SET username=?, admin=? WHERE id=?;";
+    $pdo->prepare($sql)->execute([$_POST["username"], $admin, $_POST["id"]]);
 }
+
+if ($_POST["password"] != "") {
+    $pass = password_hash($_POST["password"], PASSWORD_BCRYPT);
+    $sql = "UPDATE userdata SET password=? WHERE id=?;";
+    $pdo->prepare($sql)->execute([$pass, $_POST["id"]]);
+}
+
+header("Location: manageusers.php");
