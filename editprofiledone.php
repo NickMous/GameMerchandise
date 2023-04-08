@@ -2,10 +2,24 @@
 
 require "connect.php";
 
-if (str_contains($_POST["prijs"], ",")) {
-    header("Location: errors.php?error=wrongprice");
-} else {
-    $target_dir = "media/itemimg/";
+if (isset($_GET["remove"])) {
+    $sql = "SELECT * FROM userdata WHERE id=?";
+    $user = $pdo->prepare($sql);
+    $user->execute([$_GET["id"]]);
+    $game = $user->fetch();
+    unlink("media/pfp/" . $game["foto"]);
+    $sql = "DELETE FROM userdata WHERE id=?";
+    $pdo->prepare($sql)->execute([$_GET["id"]]);
+}
+
+if ($_FILES["foto"]["name"] != "") {
+    $sql = "SELECT * FROM userdata WHERE id=?";
+    $user = $pdo->prepare($sql);
+    $user->execute([$_POST["id"]]);
+    $game = $user->fetch();
+    unlink("media/pfp/" . $game["pfp"]);
+
+    $target_dir = "media/pfp/";
     $target_file = $target_dir . basename($_FILES["foto"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
@@ -56,9 +70,18 @@ if (str_contains($_POST["prijs"], ",")) {
             echo "Sorry, there was an error uploading your file.";
         }
     }
-
-    $sql = "INSERT INTO gamemerch(naam, game, prijs, voorraad, beschrijving, foto) VALUES (?, ?, ?, ?, ?, ?)";
-    $insert = $pdo->prepare($sql);
-    $insert->execute([$_POST["itemnaam"], $_POST["game"], $_POST["prijs"], $_POST["voorraad"], $_POST["beschrijving"], $_FILES["foto"]["name"]]);
-    header("Location: productlist.php");
+    $sql = "UPDATE userdata SET username=?, pfp=? WHERE id=?;";
+    $pdo->prepare($sql)->execute([$_POST["username"], $_FILES["foto"]["name"], $_POST["id"]]);
+} else {
+    $sql = "UPDATE userdata SET username=? WHERE id=?;";
+    $pdo->prepare($sql)->execute([$_POST["username"], $_POST["id"]]);
 }
+
+if ($_POST["password"] != "") {
+    $pass = password_hash($_POST["password"], PASSWORD_BCRYPT);
+    $sql = "UPDATE userdata SET password=? WHERE id=?;";
+    $pdo->prepare($sql)->execute([$pass, $_POST["id"]]);
+}
+$_SESSION["username"] = $_POST["username"];
+
+header("Location: profile.php");

@@ -16,6 +16,7 @@ if (isset($_POST["login"])) {
             if (password_verify($_POST["password"], $user["password"])) {
                 $_SESSION["logged"] = true;
                 $_SESSION["username"] = $_POST["username"];
+                $_SESSION["id"] = $user["id"];
                 header("Location: index.php");
             } else {
                 $error = 1;

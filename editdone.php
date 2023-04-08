@@ -71,9 +71,9 @@ if (isset($_GET["remove"])) {
     }
     $sql = "UPDATE gamemerch SET naam=?, game=?, prijs=?, voorraad=?, beschrijving=?, foto=? WHERE id=?;";
     $pdo->prepare($sql)->execute([$_POST["itemnaam"], $_POST["game"], $_POST["prijs"], $_POST["voorraad"], $_POST["beschrijving"], $_FILES["foto"]["name"], $_POST["id"]]);
-    header("Location: edit.php?id=" . $_POST["id"]);
+    header("Location: productlist.php");
 } else {
     $sql = "UPDATE gamemerch SET naam=?, game=?, prijs=?, voorraad=?, beschrijving=? WHERE id=?;";
     $pdo->prepare($sql)->execute([$_POST["itemnaam"], $_POST["game"], $_POST["prijs"], $_POST["voorraad"], $_POST["beschrijving"], $_POST["id"]]);
-    header("Location: edit.php?id=" . $_POST["id"]);
+    header("Location: productlist.php");
 }

@@ -28,6 +28,7 @@ $games = $pdo->query($sql)->fetchAll();
 
 <body>
     <?php require "nav.php" ?>
+    <a href="index.php" class="backbutton"><h2>< Ga terug</h2></a>
     <div class="detail">
         <img src="media/itemimg/<?= $product["foto"] ?>" class="productimg">
         <div class="mgl">
@@ -37,7 +38,7 @@ $games = $pdo->query($sql)->fetchAll();
             <p><?= $product["voorraad"] ?> op voorraad</p>
             <h3>Omschrijving:</h3>
             <p><?= $product["beschrijving"] ?></p>
-            <button class="cartbtn shadow">In winkelwagen</button>
+            <button class="cartbtn shadow" onclick="add(<?= $product["id"] ?>)">In winkelwagen</button>
         </div>
     </div>
 </body>

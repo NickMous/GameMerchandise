@@ -2,12 +2,14 @@
 
 require "connect.php";
 
-$sql = "SELECT * FROM gamemerch WHERE game = ?";
+$sql = "SELECT * FROM gamemerch WHERE game = ? AND voorraad > 0;";
 $items = $pdo->prepare($sql);
 $items->execute([$_GET["game"]]);
 $sql = "SELECT game FROM gamemerch GROUP BY game;";
 $games = $pdo->query($sql)->fetchAll();
 ?>
+
+<!-- TODO: easter egg -->
 <!DOCTYPE html>
 <html lang="en">
 
