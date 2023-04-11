@@ -19,18 +19,18 @@ $games = $pdo->query($sql)->fetchAll();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php foreach ($items as $item) : ?>
-        <title><?= $product["naam"] ?></title>
-    <?php endforeach; ?>
+    <title><?= $product["naam"] ?></title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
 
 <body>
     <?php require "nav.php" ?>
-    <a href="index.php" class="backbutton"><h2>< Ga terug</h2></a>
+    <a href="index.php" class="backbutton">
+        <h2>&lt; Ga terug</h2>
+    </a>
     <div class="detail">
-        <img src="media/itemimg/<?= $product["foto"] ?>" class="productimg">
+        <img src="media/itemimg/<?= $product["foto"] ?>" class="productimg" alt="<?= $product["foto"] ?>">
         <div class="mgl">
             <h1><?= $product["naam"] ?></h1>
             <h2>€<?= $product["prijs"] ?></h2>

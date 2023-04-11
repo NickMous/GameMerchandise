@@ -18,7 +18,7 @@ require "connect.php";
     <?php require "nav.php" ?>
     <div class="cscontent">
         <div class="cselem">
-            <img src="media/itemimg/badtoy.jpg">
+            <img src="media/itemimg/badtoy.jpg" alt="badtoy">
             <div>
                 <h4>ai</h4>
                 <p>€<span>2.99</span></p>

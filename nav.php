@@ -15,10 +15,11 @@ if ($_SESSION["logged"]) {
 $sql = "SELECT game FROM gamemerch GROUP BY game;";
 $games = $pdo->query($sql)->fetchAll();
 ?>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <nav class="topnav" id="myTopnav">
     <div>
         <a href="index.php">
-            <h1 class="title">Merchandise</h1>
+            <h2 class="title">Merchandise</h2>
         </a>
     </div>
     <div class="linkdiv">
@@ -28,7 +29,7 @@ $games = $pdo->query($sql)->fetchAll();
             </button>
             <div class="dropdown-content">
                 <?php foreach ($games as $game) : ?>
-                    <a href="collection.php?game=<?= $game["game"] ?>" id="<?= $game["game"] ?>"><?= $game["game"] ?></a>
+                    <a href="collection.php?game=<?= str_replace(' ', '%20', $game["game"]) ?>" id="<?= str_replace(' ', '%20', $game["game"]) ?>"><?= $game["game"] ?></a>
                 <?php endforeach; ?>
             </div>
         </div>
@@ -46,11 +47,12 @@ $games = $pdo->query($sql)->fetchAll();
                     </div>
                 </div>
             </div>
-            <?php if (isset($user["pfp"])) : ?>
-                <img src="media/pfp/<?= $user["pfp"] ?>" alt="">
-            <?php endif; ?>
             <div class="dropdown">
-                <button class="dropbtn" id="pf"><?= $name ?>
+                <button class="dropbtn linkdiv" id="pf">
+                    <?php if (isset($user["pfp"])) : ?>
+                        <img src="media/pfp/<?= $user["pfp"] ?>" alt="">
+                    <?php endif; ?>
+                    <?= $name ?>
                     <i class="fa fa-caret-down"></i>
                 </button>
                 <div class="dropdown-content accountcontent">
@@ -89,4 +91,7 @@ $games = $pdo->query($sql)->fetchAll();
             <a href="login.php" class="links account" id="login">Inloggen</a>
         </div>
     <?php endif; ?>
+    <a href="javascript:void(0);" class="icon" onclick="expand()">
+        <i class="fa fa-bars"></i>
+    </a>
 </nav>

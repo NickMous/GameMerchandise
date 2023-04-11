@@ -57,10 +57,12 @@ function inflateCart() {
 
         let scimg = document.createElement("img");
         ajaxGet(cart[i].id, "foto", scimg);
+        scimg.alt = "itemimg";
         scelem.appendChild(scimg);
 
         let csimg = document.createElement("img");
         ajaxGet(cart[i].id, "foto", csimg);
+        scimg.alt = "itemimg";
         cselem.appendChild(csimg);
 
         let scdiv1 = document.createElement("div");

@@ -46,7 +46,7 @@ if (isset($_POST["login"])) {
             <h1>Log in</h1>
         </div>
         <div>
-            <form action="" method="post" class="loginform">
+            <form method="post" class="loginform">
                 <label for="username" class="db">Gebruikersnaam</label>
                 <input type="text" name="username" id="username" class="db">
                 <label for="password" class="db">Wachtwoord</label>

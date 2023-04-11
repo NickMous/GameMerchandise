@@ -43,9 +43,9 @@ $games = $pdo->query($sql)->fetchAll();
                 <div class="item shadow">
                     <div>
                         <h3 class="mg"><?= $item["naam"] ?></h3>
-                        <img src="media/itemimg/<?= $item["foto"] ?>" class="itemimg">
+                        <img src="media/itemimg/<?= $item["foto"] ?>" class="itemimg" alt="<?= $item["foto"] ?>">
                     </div>
-                    <a href="detail.php?id=<?= $item["id"] ?>">Ga naar item ></a>
+                    <p class="gotobottom">Ga naar item ></p>  
                 </div>
             </a>
         <?php endforeach; ?>
