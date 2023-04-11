@@ -7,6 +7,8 @@ $games = $pdo->query($sql)->fetchAll();
 
 $error = 0;
 
+// checks if input already has been given
+
 if (isset($_POST["login"])) {
     $sql = "SELECT * FROM userdata WHERE username=?;";
     $users = $pdo->prepare($sql);

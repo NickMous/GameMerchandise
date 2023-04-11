@@ -7,6 +7,8 @@ $games = $pdo->query($sql)->fetchAll();
 $found = 0;
 $success = 0;
 
+// checks if input already has been given
+
 if (isset($_POST["register"])) {
     $hash = password_hash($_POST["password"], PASSWORD_BCRYPT);
     $sql = "SELECT * FROM userdata WHERE username=?;";

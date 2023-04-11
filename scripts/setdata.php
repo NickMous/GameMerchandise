@@ -1,5 +1,7 @@
 <?php
 
+// file for setting data in database with AJAX
+
 $host = 'localhost';
 $db   = 'sdhmerchstore';
 $user = 'bit_academy';

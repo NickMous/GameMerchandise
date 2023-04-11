@@ -10,6 +10,8 @@ if (localStorage.getItem("cart") == null) {
     cart = JSON.parse(localStorage.getItem("cart"));
 }
 
+/* funtion for detail.php. runs when add to cart is clicked. */
+
 function add(id) {
     let done = 0;
     for (let i = 0; i < cart.length; i++) {
@@ -30,6 +32,8 @@ function add(id) {
     reloadCart();
 }
 
+// Empty out the divs and inflate them
+
 function reloadCart() {
     let divsc = document.querySelectorAll("div.scelem");
     for (let i = 0; i < divsc.length; i++) {
@@ -41,6 +45,8 @@ function reloadCart() {
     }
     inflateCart();
 }
+
+// inflate all the carts and add an eventlistener where needed
 
 function inflateCart() {
     let itemconfirm = 0;
@@ -377,9 +383,13 @@ function ajaxGet(id, data, element) {
     xmlhttp.send();
 }
 
+// loads the cart when the window loads
+
 window.onload = () => {
     reloadCart();
 };
+
+// updates all total prices
 
 function updateTotal() {
     document.getElementById("sctotal").textContent = 0;

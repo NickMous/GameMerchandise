@@ -2,6 +2,8 @@
 
 require "connect.php";
 
+// If the user is not logged in or not an admin, they should be redirected to the homepage
+
 if (isset($_POST["admin"])) {
     $admin = "yes";
 } else {

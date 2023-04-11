@@ -1,5 +1,7 @@
 <?php
 
+// add a product to the database and product catalog.
+
 require "connect.php";
 
 if (str_contains($_POST["prijs"], ",")) {

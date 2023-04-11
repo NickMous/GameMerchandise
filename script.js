@@ -7,6 +7,8 @@ if (localStorage.getItem("cart") == null) {
     cart = JSON.parse(localStorage.getItem("cart"));
 }
 
+// adds product to cart, runs on detail.php when add to cart is clicked
+
 function add(id) {
     let done = 0;
     for (let i = 0; i < cart.length; i++) {
@@ -43,6 +45,8 @@ function add(id) {
     reloadCart();
 }
 
+// reloads everyting in the cart when cart is updated
+
 function reloadCart() {
     let div = document.querySelectorAll("div.scelem");
     for (let i = 0; i < div.length; i++) {
@@ -50,6 +54,8 @@ function reloadCart() {
     }
     inflateCart();
 }
+
+// inflates the cart with all products
 
 function inflateCart() {
     let itemconfirm = 0;
@@ -212,9 +218,13 @@ function ajaxGet(id, data, element) {
     xmlhttp.send();
 }
 
+// loads when the page fully loads
+
 window.onload = () => {
     reloadCart();
 };
+
+// update all total checkout money
 
 function updateTotal() {
     document.getElementById("total").textContent = 0;

@@ -1,5 +1,7 @@
 <?php
 
+// this file is required almost everywhere. it loads the session and database
+
 session_start();
 
 if (!isset($_SESSION["logged"])) {

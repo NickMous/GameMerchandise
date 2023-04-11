@@ -2,6 +2,8 @@
 
 require "connect.php";
 
+// checks if user wants to remove or add
+
 if (isset($_GET["remove"])) {
     $sql = "SELECT * FROM gamemerch WHERE id=?";
     $user = $pdo->prepare($sql);

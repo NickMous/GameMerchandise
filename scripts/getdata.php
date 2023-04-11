@@ -1,5 +1,7 @@
 <?php
 
+// file for retrieving data from database with AJAX
+
 $host = 'localhost';
 $db   = 'sdhmerchstore';
 $user = 'bit_academy';

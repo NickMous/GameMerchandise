@@ -1,5 +1,7 @@
 <?php
 
+// If the user is not logged in or not an admin, they should be redirected to the homepage
+
 if ($_SESSION["logged"]) {
     $sql = "SELECT * FROM userdata WHERE username = ?;";
     $users = $pdo->prepare($sql);

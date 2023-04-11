@@ -2,6 +2,8 @@
 
 require "connect.php";
 
+// If the user is not logged in or not an admin, they should be redirected to the homepage
+
 if ($_SESSION["logged"]) {
     $sql = "SELECT * FROM userdata WHERE username = ?;";
     $users = $pdo->prepare($sql);
@@ -18,6 +20,7 @@ if ($_SESSION["logged"]) {
 if ($user["admin"] == "no") {
     header("Location: index.php?no");
 }
+
 $sql = "SELECT * FROM gamemerch WHERE id=?;";
 $games = $pdo->prepare($sql);
 $games->execute([$_GET["id"]]);
