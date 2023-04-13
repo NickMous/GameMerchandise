@@ -29,6 +29,7 @@ $games = $pdo->query($sql)->fetchAll();
     <a href="index.php" class="backbutton">
         <h2>&lt; Ga terug</h2>
     </a>
+    <p class="successmsg added notyet">Product is toegevoegd aan winkelwagen!</p>
     <div class="detail">
         <img src="media/itemimg/<?= $product["foto"] ?>" class="productimg" alt="<?= $product["foto"] ?>">
         <div class="mgl">

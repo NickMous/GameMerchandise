@@ -13,42 +13,34 @@ CREATE TABLE `gamemerch` (
 );
 
 INSERT INTO
-  `gamemerch` (
-    `naam`,
-    `game`,
-    `prijs`,
-    `voorraad`,
-    `id`,
-    `beschrijving`,
-    `foto`
-  )
+  sdhmerchstore.gamemerch (naam, game, prijs, voorraad, beschrijving, foto, id)
 VALUES
   (
     'Pickaxe',
     'Fortnite',
-    9.99,
+    19.99,
     5,
-    1,
     'Fortnite Pickaxe',
-    'pickaxe.jpg'
+    'pickaxe.jpg',
+    1
   ),
   (
     'Backpack',
     'Fortnite',
     14.99,
     3,
-    2,
     'Fortnite Backpack',
-    'backpack.jpg'
+    'backpack.jpg',
+    2
   ),
   (
     'Creeper',
     'Minecraft',
     4.99,
-    15,
-    3,
+    5,
     'Minecraft Creeper',
-    'creeper.png'
+    'creeper.png',
+    3
   ),
   (
     'Toy plushie',
@@ -56,7 +48,8 @@ VALUES
     5.99,
     17,
     'Just a random ass toy',
-    'badtoy.jpg'
+    'badtoy.jpg',
+    4
   ),
   (
     'struisvogel',
@@ -64,18 +57,9 @@ VALUES
     19.99,
     98,
     'Jeroen de struisvogel',
-    'jeroen.jpg'
+    'jeroen.jpg',
+    5
   );
-
-(
-  'ai',
-  'ai',
-  2.99,
-  17,
-  9,
-  'geen idee',
-  'badtoy.jpg'
-);
 
 CREATE TABLE `userdata` (
   `username` varchar(100) NOT NULL,

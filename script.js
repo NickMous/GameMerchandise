@@ -10,6 +10,11 @@ if (localStorage.getItem("cart") == null) {
 // adds product to cart, runs on detail.php when add to cart is clicked
 
 function add(id) {
+    document.querySelector("p.added").classList.remove("notyet");
+    let timer = setInterval(() => {
+        document.querySelector("p.added").classList.add("notyet");
+        clearInterval(timer);
+    }, 5000);
     let done = 0;
     for (let i = 0; i < cart.length; i++) {
         if (cart[i].id == id) {

@@ -22,6 +22,10 @@ Username: sanderei
 
 Password: sterkwachtwoord
 
+## Bit-Academy
 
+Ik ga voor het certificaat met extra studiepunten :))
 
-Online available at projects.nickmous.com
+online te vinden op: projects.nickmous.com
+
+Ja, dit is een eigen host en HTTPS is beschikbaar!

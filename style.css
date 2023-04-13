@@ -681,3 +681,18 @@ a.icon {
     position: relative;
     bottom: 0px;
 }
+
+.added {
+    display: block;
+    position: fixed;
+    opacity: 1;
+    left: 30%;
+    right: 30%;
+    text-align: center;
+    transition: all 0.5s ease-in-out;
+}
+
+.notyet {
+    opacity: 0;
+    transition: all 2s ease-in-out;
+}
