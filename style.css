@@ -37,6 +37,7 @@ body {
     font-family: Roboto;
     background-color: #B2DFDB;
     height: 100%;
+    font-display: swap;
 }
 
 nav {
